@@ -17,8 +17,8 @@ import subprocess
 import importlib
 
 # define variables
-filepath = '/Biochemistry/Aliases/Unique_ModelSEED_Reaction_Pathways.tsv'
-tablename = 'reaction_pathways'
+filepath = '/Biochemistry/reactions.tsv'
+tablename = 'reactions'
 delimiter = '\t'
 modelname = tablename.lower().replace('_', '').capitalize()
 datastore = {}
@@ -52,7 +52,7 @@ for key, values in datastore.items():
 
 # check if table is already in database
 filepath = "models.py"
-classstr = "class " + modelname
+classstr = "class " + modelname + '('
 out = subprocess.check_output("python ../manage.py inspectdb", shell=True)
 if classstr not in out.decode('utf-8'):  # it's output as a byte string
     print("Adding table to DB")
@@ -71,11 +71,12 @@ if classstr not in out.decode('utf-8'):  # it's output as a byte string
                 flen = 64
             elif maxlens[idx] < 257:
                 flen = 256
-            elif maxlens[idx] < 1025:
-                flen = 1025
             else:
-                flen = 4096
-            mtext.append('    ' + label + ' = models.CharField(max_length=' + str(flen) + ', default=\'\')\n')
+                flen = 16388
+            if flen == 16388:
+                mtext.append('    ' + label + ' = models.TextField(default=\'\')\n')
+            else:
+                mtext.append('    ' + label + ' = models.CharField(max_length=' + str(flen) + ', default=\'\')\n')
         mtext.append('    comments = models.CharField(max_length=256, default=\'\')\n')
         mtext.append('    updated = models.DateTimeField(auto_now=True)\n')
         mtext.append('\n')

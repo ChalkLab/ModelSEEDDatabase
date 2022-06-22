@@ -81,7 +81,10 @@ DATABASES = {
         'USER': 'modelseed',
         'PASSWORD': 'seedling',
         'HOST': '127.0.0.1',
-        'PORT': '3307'
+        'PORT': '3307',
+        'OPTIONS': {
+           "init_command": "SET storage_engine=MYISAM",
+        }
     }
 }
 
