@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} ModelSEED in SciData Project {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-10 offset-md-1 mt-2">
+            <p>This project is a conversion of data from the ModelSEED project (see https://github.com/ModelSEED/ModelSEEDDatabase)<br/>
+            into the semantic SciData JSON-LD format (https://stuchalk.github.io/scidata/).</p>
+            <h3>Inventory</h3>
+            <p>The system currently contains:</p>
+            <ul>
+                <li><a href="/compounds/list/">Compounds</a></li>
+                <li><a href="/reactions/list/">Reactions</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

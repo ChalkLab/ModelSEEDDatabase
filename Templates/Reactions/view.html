@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} ModelSEED in SciData Project {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1 mt-2">
+            <h3>Reaction: {{ rxn.name }}</h3>
+            <ul>
+                <li>Reaction code: {{ rxn.code }}</li>
+            </ul>
+            <h4>Compounds</h4>
+            <ul>
+            {% for cr in rxn.compoundsreactions_set.all %}
+                <li><a href="/compounds/view/{{ cr.compound.compoundid }}">{{ cr.compound.name }}</a>: {{ cr.role }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

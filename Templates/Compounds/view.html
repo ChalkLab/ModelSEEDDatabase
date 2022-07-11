@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} ModelSEED in SciData Project {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1 mt-2">
+            <h3>Compound: {{ cmp.name }}</h3>
+            <ul>
+                <li>Formula: {{ cmp.formula }}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

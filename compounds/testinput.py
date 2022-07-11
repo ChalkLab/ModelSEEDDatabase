@@ -6,8 +6,8 @@ django.setup()
 
 from django.db.migrations.recorder import MigrationRecorder
 from Django.settings import *
-from compoundsapp.modelseeddb import *
-from compoundsapp.testfunctions import *
+from compounds.modelseeddb import *
+from compounds.testfunctions import *
 import subprocess
 import importlib
 import requests
