@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'ingestion',
     'reactions',
     'compounds',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    'identifiers',
 ]
 
 MIDDLEWARE = [

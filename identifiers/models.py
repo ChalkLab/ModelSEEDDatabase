@@ -12,11 +12,11 @@ class CompoundsMm(models.Model):
     compoundid = models.CharField(max_length=16)
     abbreviation = models.TextField()
     name = models.TextField()
-    iupac_name = models.TextField()
+    iupac_name = models.TextField(blank=True, null=True)
     formula = models.CharField(max_length=64)
     mass = models.CharField(max_length=16)
     source = models.CharField(max_length=64)
-    inchikey = models.CharField(max_length=64)
+    inchikey = models.TextField()
     charge = models.CharField(max_length=16)
     key_charge = models.CharField(max_length=16)
     charge_ok = models.CharField(max_length=16)
@@ -39,3 +39,16 @@ class CompoundsMm(models.Model):
     class Meta:
         managed = False
         db_table = 'compounds_mm'
+
+
+class IdentifiersTestMm(models.Model):
+    cpds_id = models.CharField(max_length=16)
+    type = models.CharField(max_length=256)
+    value = models.TextField()
+    source = models.CharField(max_length=16, blank=True, null=True)
+    comment = models.CharField(max_length=256, blank=True, null=True)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'identifiers_test_mm'

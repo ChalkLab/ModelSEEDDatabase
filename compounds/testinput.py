@@ -6,13 +6,14 @@ django.setup()
 
 from django.db.migrations.recorder import MigrationRecorder
 from Django.settings import *
-from compounds.modelseeddb import *
+from compounds.models import *
 from compounds.testfunctions import *
 import subprocess
 import importlib
 import requests
 
 x = 1
+print(x)
 
 # compoundsdata = CompoundsMm.objects.all()
 # for compound in compoundsdata.iterator():
