@@ -20,16 +20,17 @@ searchablecpds = CompoundsMm.objects.exclude(Q(inchikey='') | Q(inchikey__isnull
 for ids, cpd in searchablecpds:
     # iden = IdentifiersTestMm()
     sucess = False
+    text=''
     while not sucess:
         test = requests.get('https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/' + cpd + '/synonyms/txt')
         text = str(test.content)[2:-3]
-        if 'PUGREST.ServerError' in test:
+        if 'PUGREST.ServerError' in text:
             continue
         else:
             sucess = True
     synonyms = text.split('\\n')
     for syn in synonyms:
-        match = re.search('\d{2,7}-\d{2}-\d', syn)
+        match = re.search('\\d{2,7}-\\d{2}-\\d', syn)
         if match is not None:
             print(syn)
             # iden.cpds_id = ids
