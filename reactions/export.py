@@ -10,6 +10,11 @@ cmpnts = list(CompoundsReactions.objects.filter(reactionid=rxn['reactionid']).va
 cmpids = []
 for cmp in cmpnts:
     cmpids.append(cmp['compoundid_id'])
+
 cmpds = list(Compounds.objects.filter(compoundid__in=cmpids).values())
+for cmpd in cmpds:
+    cmpids = list(Identifiers.objects.filter(cpds_id=cmpd['compoundid']).values())
+    cmpd.update({'ids': cmpids})
+
 data = {'reaction': rxn, 'components': cmpnts, 'compounds': cmpds}
 print(json.dumps(data, indent=4, default=str))
