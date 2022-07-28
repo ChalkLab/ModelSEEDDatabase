@@ -8,9 +8,11 @@ from django.db.migrations.recorder import MigrationRecorder
 from Django.settings import *
 from reactions.models import *
 
+# code to populate the compounds_reactions table
 
 # empty table
 CompoundsReactions.objects.all().delete()
+# get reaction data
 rxns = Reactions.objects.filter(comments__isnull=True).values_list('reactionid', 'stoichiometry')
 for rxnid, rxn in rxns:
     parts = rxn.split(';')

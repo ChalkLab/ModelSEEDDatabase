@@ -33,16 +33,17 @@ class Reactions(models.Model):
 
 
 class CompoundsReactions(models.Model):
-    compound = models.ForeignKey('Compounds', models.DO_NOTHING, db_column='compoundid')
-    reaction = models.ForeignKey('Reactions', models.DO_NOTHING, db_column='reactionid')
-    form = models.PositiveIntegerField()
+    compoundid = models.ForeignKey('Compounds', models.DO_NOTHING, db_column='compoundid', blank=True, null=True)
+    reactionid = models.ForeignKey('Reactions', models.DO_NOTHING, db_column='reactionid', blank=True, null=True)
+    form = models.PositiveIntegerField(blank=True, null=True)
     role = models.CharField(max_length=8, blank=True, null=True)
-    stoichiometry = models.PositiveIntegerField(blank=True, null=True)
+    stoichiometry = models.FloatField(blank=True, null=True)
     updated = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'compounds_reactions'
+        unique_together = (('compoundid', 'reactionid', 'form'),)
 
 
 class Compounds(models.Model):
@@ -73,3 +74,16 @@ class Compounds(models.Model):
     class Meta:
         managed = False
         db_table = 'compounds'
+
+
+class Identifiers(models.Model):
+    cpds = models.ForeignKey('Compounds', models.DO_NOTHING)
+    type = models.CharField(max_length=256)
+    value = models.TextField()
+    source = models.CharField(max_length=64, blank=True, null=True)
+    comment = models.CharField(max_length=256, blank=True, null=True)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'identifiers'
